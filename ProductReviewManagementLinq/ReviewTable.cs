@@ -41,15 +41,15 @@ namespace ProductReviewManagementLinq
         }
 
 
-        // UC-11 Retrieves all records with review contains Nice message.
-        public static void RetrieveRecordsWithReviewContainsNice()
+        // UC12 Retrieves the records for given user Id sorted by rating.
+        public static void RetrieveRecordsForGivenUserIdOrderByRating()
         {
-            var retrieveData = from records in table.AsEnumerable()
-                               where (records.Field<string>("Review") == "Nice")
-                               select records;
-            //Printing data
-            Console.WriteLine("\nRecords in table Whose Review contains Nice:");
-            foreach (var list in retrieveData)
+            var retrievedData = from records in table.AsEnumerable()
+                                where (records.Field<int>("UserId") == 1)
+                                orderby records.Field<double>("Rating") descending
+                                select records;
+            Console.WriteLine("\nSorted records by rating  with userId=1:");
+            foreach (var list in retrievedData)
             {
                 Console.WriteLine("Product Id :" + list.Field<int>("ProductId") + "\t" + "User Id :" + list.Field<int>("UserId") + "\t" + "Rating ;" + list.Field<double>("Rating") + "\t" + "Review :" + list.Field<string>("Review") + "\t" + "Is Like :" + list.Field<bool>("IsLike"));
             }
