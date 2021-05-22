@@ -9,8 +9,8 @@ namespace ProductReviewManagementLinq
     class ProductManagement
     {
 
-        //********** UC6******
-        /// UC6 Skip top five records from the list and display other records.
+        //********** UC7*******
+        
         // UC7 Retrieving reviews and productId using the lambda expression syntax
 
         public static void RetrieveProductIDAndReviewUsingLambdaSyntax(List<ProductReview> list)
