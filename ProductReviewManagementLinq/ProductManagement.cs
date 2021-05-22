@@ -11,15 +11,16 @@ namespace ProductReviewManagementLinq
 
         //********** UC6******
         /// UC6 Skip top five records from the list and display other records.
-        public static void SkipTopFiveRecords(List<ProductReview> list)
-        {
-            //using Query Syntax
-            var recordedData = (from products in list select products).Skip(5);
+        // UC7 Retrieving reviews and productId using the lambda expression syntax
 
-            Console.WriteLine("\n Skiping the Top five records and Display others ");
+        public static void RetrieveProductIDAndReviewUsingLambdaSyntax(List<ProductReview> list)
+        {
+            //Query Syntax using lambda
+            var recordedData = list.Select(reviews => new { ProductId = reviews.ProductId, Review = reviews.Review });
+            Console.WriteLine("\n Retrieving Product and Review from list");
             foreach (var productReview in recordedData)
             {
-                Console.WriteLine("Product Id :" + productReview.ProductId + "\t" + "User Id :" + productReview.UserId + "\t" + "Rating ;" + productReview.Rating + "\t" + "Review :" + productReview.Review + "\t" + "Is Like :" + productReview.isLike);
+                Console.WriteLine("Product ID : " + productReview.ProductId + "\t" + "Review : " + productReview.Review);
             }
         }
     }
