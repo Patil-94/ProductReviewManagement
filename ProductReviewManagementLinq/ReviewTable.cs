@@ -39,16 +39,19 @@ namespace ProductReviewManagementLinq
                 Console.WriteLine("Product Id :" + list.Field<int>("ProductId") + "\t" + "User Id :" + list.Field<int>("UserId") + "\t" + "Rating ;" + list.Field<double>("Rating") + "\t" + "Review :" + list.Field<string>("Review") + "\t" + "Is Like :" + list.Field<bool>("IsLike"));
             }
         }
-       
-        
-        // UC10 Finds the average rating for each productId.
-        public static void FindAverageRatingOfTheEachProductId()
+
+
+        // UC-11 Retrieves all records with review contains Nice message.
+        public static void RetrieveRecordsWithReviewContainsNice()
         {
-            var records = table.AsEnumerable().GroupBy(r => r.Field<int>("ProductId")).Select(r => new { ProductId = r.Key, Average = r.Average(z => (z.Field<double>("Rating"))) });
-            Console.WriteLine("\nProductId and its average rating");
-            foreach (var v in records)
+            var retrieveData = from records in table.AsEnumerable()
+                               where (records.Field<string>("Review") == "Nice")
+                               select records;
+            //Printing data
+            Console.WriteLine("\nRecords in table Whose Review contains Nice:");
+            foreach (var list in retrieveData)
             {
-                Console.WriteLine($"ProductID:{v.ProductId},AverageRating:{v.Average}");
+                Console.WriteLine("Product Id :" + list.Field<int>("ProductId") + "\t" + "User Id :" + list.Field<int>("UserId") + "\t" + "Rating ;" + list.Field<double>("Rating") + "\t" + "Review :" + list.Field<string>("Review") + "\t" + "Is Like :" + list.Field<bool>("IsLike"));
             }
         }
     }

@@ -28,7 +28,7 @@ namespace ProductReviewManagementLinq
                 new ProductReview() { ProductId = 6, UserId = 7, Rating = 3, Review = "Average",  isLike = true }
             };
             ReviewTable.AddDataIntoDataTable();
-            ReviewTable.FindAverageRatingOfTheEachProductId();
+            ReviewTable.RetrieveRecordsWithReviewContainsNice();
             Console.ReadLine();
         }
     }
