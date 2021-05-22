@@ -39,18 +39,16 @@ namespace ProductReviewManagementLinq
                 Console.WriteLine("Product Id :" + list.Field<int>("ProductId") + "\t" + "User Id :" + list.Field<int>("UserId") + "\t" + "Rating ;" + list.Field<double>("Rating") + "\t" + "Review :" + list.Field<string>("Review") + "\t" + "Is Like :" + list.Field<bool>("IsLike"));
             }
         }
-        //  UC9 Retrieves all records whose is like is true.
-
-        public static void RetrieveRecordWithTrueIsLike()
+       
+        
+        // UC10 Finds the average rating for each productId.
+        public static void FindAverageRatingOfTheEachProductId()
         {
-            var retrieveData = from records in table.AsEnumerable()
-                               where (records.Field<bool>("IsLike") == true)
-                               select records;
-            //Printing data
-            Console.WriteLine("\nRecords in table whose IsLike value is true:");
-            foreach (var list in retrieveData)
+            var records = table.AsEnumerable().GroupBy(r => r.Field<int>("ProductId")).Select(r => new { ProductId = r.Key, Average = r.Average(z => (z.Field<double>("Rating"))) });
+            Console.WriteLine("\nProductId and its average rating");
+            foreach (var v in records)
             {
-                Console.WriteLine("Product Id :" + list.Field<int>("ProductId") + "\t" + "User Id :" + list.Field<int>("UserId") + "\t" + "Rating ;" + list.Field<double>("Rating") + "\t" + "Review :" + list.Field<string>("Review") + "\t" + "Is Like :" + list.Field<bool>("IsLike"));
+                Console.WriteLine($"ProductID:{v.ProductId},AverageRating:{v.Average}");
             }
         }
     }
